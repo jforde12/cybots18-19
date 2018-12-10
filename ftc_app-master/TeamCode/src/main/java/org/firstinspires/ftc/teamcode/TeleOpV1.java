@@ -48,7 +48,7 @@ public class TeleOpV1 extends OpMode {
     private DcMotor DFMotor;
     private DcMotor back;
     private Servo MServo;
-
+    private Servo RServo;
 
     @Override
     public void init() {
@@ -61,6 +61,7 @@ public class TeleOpV1 extends OpMode {
         DFMotor = hardwareMap.get(DcMotor.class, "DF");
         back = hardwareMap.get(DcMotor.class, "Back");
         MServo  = hardwareMap.get(Servo.class, "MS");
+        RServo  = hardwareMap.get(Servo.class, "Rake");
 
         DBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         PFMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -109,6 +110,15 @@ public class TeleOpV1 extends OpMode {
             }else {
                 back.setPower(0);
             }
+
+        if (gamepad1.a) {
+            RServo.setPosition(Servo.MAX_POSITION);
+
+        }else if (gamepad1.b) {
+            RServo.setPosition(Servo.MIN_POSITION);
+
+        }
+
 
     }
 

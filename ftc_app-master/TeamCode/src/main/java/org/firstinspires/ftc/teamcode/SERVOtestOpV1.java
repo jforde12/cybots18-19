@@ -114,10 +114,10 @@ public class SERVOtestOpV1 extends OpMode {
             }
 
         if (gamepad1.a) {
-            RServo.setPosition(.7);
+            RServo.setPosition(Servo.MAX_POSITION);
 
-             }else {
-            RServo.setPosition(0);
+             }else if (gamepad1.b) {
+            RServo.setPosition(Servo.MIN_POSITION);
 
             }
 
