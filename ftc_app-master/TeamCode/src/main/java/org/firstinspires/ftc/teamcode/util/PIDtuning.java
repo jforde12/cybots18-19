@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.util;
  * Created for Cybots Robotics on 2/16/18.
  */
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -12,7 +13,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Robot;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-
+@Disabled
 @TeleOp(name="PID Tuning", group="Test")
 public class PIDtuning extends LinearOpMode
 {

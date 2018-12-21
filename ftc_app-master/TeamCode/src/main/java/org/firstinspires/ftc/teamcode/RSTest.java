@@ -65,7 +65,7 @@ import com.qualcomm.robotcore.util.Hardware;
  */
 
 @Autonomous(name="RSTest", group="Auto")
-//@Disabled
+@Disabled
 public class RSTest extends LinearOpMode {
     
     /* Declare OpMode members. */

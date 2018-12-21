@@ -30,13 +30,12 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.Gyroscope;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.Hardware;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Hardware;
 
 /**
  * This file illustrates the concept of driving a path based on encoder counts.
@@ -65,9 +64,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="AutoV2018", group="Auto")
-
-public class AutoV2018 extends LinearOpMode {
+@Autonomous(name="simpleDEPOT", group="Auto")
+//@Disabled
+public class simpleDEPOT extends LinearOpMode {
     
     /* Declare OpMode members. */
     Hardware         robot   = new Hardware();   // Use a Pushbot's hardware
@@ -128,7 +127,7 @@ public class AutoV2018 extends LinearOpMode {
         DBMotor.setPower(.5);
         
         runtime.reset();
-        while (runtime.milliseconds()<500) {
+        while (runtime.milliseconds()<750) {
          
         }
         
@@ -151,14 +150,25 @@ public class AutoV2018 extends LinearOpMode {
         }
         MServo.setPosition(Servo.MIN_POSITION);
 
+        DFMotor.setPower(-.5);
+        PBMotor.setPower(.5);
+        PFMotor.setPower(.5);
+        DBMotor.setPower(-.5);
 
-        telemetry.addData("Path", "Complete");
-        telemetry.update();
+        runtime.reset();
+        while (runtime.milliseconds()<750) {
+
+        }
+
+        DFMotor.setPower(0);
+        PBMotor.setPower(0);
+        PFMotor.setPower(0);
+        DBMotor.setPower(0);
 
         lift.setPower(1);
         runtime.reset();
 
-        while (runtime.milliseconds()<6300) {
+        while (runtime.milliseconds()<6000) {
 
         }
         lift.setPower(0);

@@ -30,11 +30,13 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.Gyroscope;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Hardware;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Hardware;
 
 /**
  * This file illustrates the concept of driving a path based on encoder counts.
@@ -63,9 +65,9 @@ import com.qualcomm.robotcore.util.Hardware;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="DEPOTauto", group="Auto")
+@Autonomous(name="simpleCRATER", group="Auto")
 
-public class DEPOTauto extends LinearOpMode {
+public class simpleCRATER extends LinearOpMode {
     
     /* Declare OpMode members. */
     Hardware         robot   = new Hardware();   // Use a Pushbot's hardware
@@ -115,24 +117,18 @@ public class DEPOTauto extends LinearOpMode {
         lift.setPower(-1);
         runtime.reset();
         
-        while (runtime.milliseconds()<6000) {
+        while (runtime.milliseconds()<6300) {
          
         }
         lift.setPower(0);
-
-        runtime.reset();
-        //change this number to add a delay
-        while (runtime.milliseconds()<5) {
-
-        }
-
+        
         DFMotor.setPower(.5);
         PBMotor.setPower(-.5);
         PFMotor.setPower(-.5);
         DBMotor.setPower(.5);
         
         runtime.reset();
-        while (runtime.milliseconds()<1100) {
+        while (runtime.milliseconds()<500) {
          
         }
         
@@ -156,63 +152,19 @@ public class DEPOTauto extends LinearOpMode {
         MServo.setPosition(Servo.MIN_POSITION);
 
 
-        DFMotor.setPower(.25);
-        PBMotor.setPower(.25);
-        PFMotor.setPower(.25);
-        DBMotor.setPower(.25);
-
-        runtime.reset();
-        while (runtime.milliseconds()<370) {
-
-        }
-
-        PBMotor.setPower(.4);
-        PFMotor.setPower(-.25);
-        DBMotor.setPower(.25);
-        DFMotor.setPower(-.4);
-
-        runtime.reset();
-        while (runtime.milliseconds()<550) {
-
-        }
-
-
-        PBMotor.setPower(.4);
-        PFMotor.setPower(.4);
-        DBMotor.setPower(-.38);
-        DFMotor.setPower(-.38);
-
-
-
-        runtime.reset();
-        while (runtime.milliseconds()<1400) {
-
-        }
-
-
-        DFMotor.setPower(0);
-        PBMotor.setPower(0);
-        PFMotor.setPower(0);
-        DBMotor.setPower(0);
-
-
-        telemetry.addData("Path", "Complete");
-        telemetry.update();
-
         lift.setPower(1);
-
-
         runtime.reset();
-//CHANGE THIS TO 3000 FOR ACTUAL GO TIME
+
         while (runtime.milliseconds()<6000) {
 
         }
+
         lift.setPower(0);
 
-        PBMotor.setPower(.35);
-        PFMotor.setPower(.35);
-        DBMotor.setPower(-.35);
-        DFMotor.setPower(-.35);
+        PBMotor.setPower(-.25);
+        PFMotor.setPower(-.25);
+        DBMotor.setPower(.25);
+        DFMotor.setPower(.25);
 
         runtime.reset();
         while (runtime.milliseconds()<2500) {
@@ -223,8 +175,8 @@ public class DEPOTauto extends LinearOpMode {
         PFMotor.setPower(0);
         DBMotor.setPower(0);
         DFMotor.setPower(0);
-
     }
+
     /*
      *  Method to perfmorm a relative move, based on encoder counts.
      *  Encoders are not reset as the move is based on the current position.

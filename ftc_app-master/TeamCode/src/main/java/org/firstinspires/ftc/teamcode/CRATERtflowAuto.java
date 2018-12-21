@@ -55,11 +55,11 @@ import java.util.List;
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained below.
  */
-@Autonomous(name = "DoubleTimeTFlowVAuto", group = "Auto")
+@Autonomous(name = "CRATERtflowAuto", group = "Auto")
 
-//@Disabled
+@Disabled
 
-public class DoubleTimedTFlowVAuto extends LinearOpMode {
+public class CRATERtflowAuto extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     private static final String LABEL_GOLD_MINERAL = "Gold Mineral";
     private static final String LABEL_SILVER_MINERAL = "Silver Mineral";
@@ -179,27 +179,29 @@ public class DoubleTimedTFlowVAuto extends LinearOpMode {
                             silverMineral2X = (int) recognition.getLeft();
                           }
                         }
-                        if (goldMineralX != -1 && silverMineral1X != -1) {
-                          if (goldMineralX < silverMineral1X) {
-                            telemetry.addData("Gold Mineral Position", "Middle");
-                            goldMiddle();
-                          } else if (goldMineralX > silverMineral1X) {
-                            telemetry.addData("Gold Mineral Position", "Right");
-                            goldRight();
-                          }
+                          if (goldMineralX != -1 && silverMineral1X != -1) {
+                              if (goldMineralX > silverMineral1X) {
+                                  telemetry.addData("Gold Mineral Position", "Middle");
+                                  telemetry.update();
+                                  //goldMiddle();
+                              } else if (goldMineralX < silverMineral1X) {
+                                  telemetry.addData("Gold Mineral Position", "Left");
+                                  telemetry.update();
+                                  //goldLeft();
+                              }
+                          } else {
+                              telemetry.addData("Gold Mineral Position", "Right");
+                              telemetry.update();
+                              //goldRight();
                         }
-                        else{
-                            telemetry.addData("Gold Mineral Position", "Left");
-                            goldLeft();
-                        }
 
 
 
-                          if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
+                          /*if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
                             if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
 
                             }
-                          }
+                          }*/
                       }
                       telemetry.update();
                     }
@@ -300,13 +302,93 @@ public class DoubleTimedTFlowVAuto extends LinearOpMode {
         lift.setPower(0);
 
 
+        DFMotor.setPower(.5);
+        PBMotor.setPower(-.5);
+        PFMotor.setPower(-.5);
+        DBMotor.setPower(.5);
+
+        runtime.reset();
+        while (runtime.milliseconds()<300) {
+
+        }
+
+        DFMotor.setPower(-.5);
+        PBMotor.setPower(.5);
+        PFMotor.setPower(.5);
+        DBMotor.setPower(-.5);
+
+        runtime.reset();
+        while (runtime.milliseconds()<300) {
+
+        }
+
         DFMotor.setPower(.3);
         PBMotor.setPower(-.3);
         PFMotor.setPower(-.3);
         DBMotor.setPower(.3);
 
         runtime.reset();
-        while (runtime.milliseconds() < 2000) {
+        while (runtime.milliseconds()<100) {
+
+        }
+        DFMotor.setPower(-.25);
+        PBMotor.setPower(-.25);
+        PFMotor.setPower(-.25);
+        DBMotor.setPower(-.25);
+
+        runtime.reset();
+        while (runtime.milliseconds()<1000) {
+
+        }
+
+
+        DFMotor.setPower(.5);
+        PBMotor.setPower(-.5);
+        PFMotor.setPower(-.5);
+        DBMotor.setPower(.5);
+
+        runtime.reset();
+        while (runtime.milliseconds()<300) {
+
+        }
+
+        DFMotor.setPower(.3);
+        PBMotor.setPower(-.3);
+        PFMotor.setPower(-.3);
+        DBMotor.setPower(.3);
+
+        runtime.reset();
+        while (runtime.milliseconds()<750) {
+
+        }
+
+        DFMotor.setPower(-.25);
+        PBMotor.setPower(-.25);
+        PFMotor.setPower(-.25);
+        DBMotor.setPower(-.25);
+
+        runtime.reset();
+        while (runtime.milliseconds()<420) {
+
+        }
+
+        PBMotor.setPower(-.5);
+        PFMotor.setPower(.3);
+        DBMotor.setPower(-.3);
+        DFMotor.setPower(.5);
+
+        runtime.reset();
+        while (runtime.milliseconds()<1000) {
+
+        }
+
+        PBMotor.setPower(-.5);
+        PFMotor.setPower(-.4);
+        DBMotor.setPower(.4);
+        DFMotor.setPower(.5);
+
+        runtime.reset();
+        while (runtime.milliseconds()<1500) {
 
         }
 
@@ -318,50 +400,34 @@ public class DoubleTimedTFlowVAuto extends LinearOpMode {
         MServo.setPosition(Servo.MIN_POSITION);
         runtime.reset();
 
-        while (runtime.milliseconds() < 100) {
+        while (runtime.milliseconds()<100) {
 
         }
         MServo.setPosition(Servo.MIN_POSITION);
         runtime.reset();
 
-        while (runtime.milliseconds() < 100) {
+        while (runtime.milliseconds()<100) {
 
         }
         MServo.setPosition(Servo.MIN_POSITION);
 
 
-        DFMotor.setPower(.25);
-        PBMotor.setPower(.25);
-        PFMotor.setPower(.25);
-        DBMotor.setPower(.25);
+        PBMotor.setPower(.35);
+        PFMotor.setPower(.35);
+        DBMotor.setPower(-.45);
+        DFMotor.setPower(-.45);
 
-        runtime.reset();
-        while (runtime.milliseconds() < 370) {
-
-        }
-
-        PBMotor.setPower(.3);
-        PFMotor.setPower(-.25);
-        DBMotor.setPower(.25);
-        DFMotor.setPower(-.3);
-
-        runtime.reset();
-        while (runtime.milliseconds() < 800) {
-
-        }
-
-
-        PBMotor.setPower(.4);
-        PFMotor.setPower(.4);
-        DBMotor.setPower(-.4);
-        DFMotor.setPower(-.4);
 
 
         runtime.reset();
-        while (runtime.milliseconds() < 1400) {
+        while (runtime.milliseconds()<1950) {
 
         }
 
+        runtime.reset();
+        while (runtime.milliseconds()<350) {
+
+        }
 
         DFMotor.setPower(0);
         PBMotor.setPower(0);
@@ -377,18 +443,18 @@ public class DoubleTimedTFlowVAuto extends LinearOpMode {
 
         runtime.reset();
 //CHANGE THIS TO 3000 FOR ACTUAL GO TIME
-        while (runtime.milliseconds() < 6000) {
+        while (runtime.milliseconds()<6000) {
 
         }
         lift.setPower(0);
 
-        PBMotor.setPower(.25);
-        PFMotor.setPower(.25);
-        DBMotor.setPower(-.25);
-        DFMotor.setPower(-.25);
+        PBMotor.setPower(.35);
+        PFMotor.setPower(.35);
+        DBMotor.setPower(-.35);
+        DFMotor.setPower(-.35);
 
         runtime.reset();
-        while (runtime.milliseconds() < 2500) {
+        while (runtime.milliseconds()<2000) {
 
         }
 
@@ -410,42 +476,73 @@ public class DoubleTimedTFlowVAuto extends LinearOpMode {
         }
         lift.setPower(0);
 
-        DFMotor.setPower(.2);
-        PBMotor.setPower(-.2);
-        PFMotor.setPower(-.2);
-        DBMotor.setPower(.2);
-
-        runtime.reset();
-        while (runtime.milliseconds()<500) {
-
-        }
-//strafe left
-        PBMotor.setPower(.3);
-        PFMotor.setPower(-.3);
-        DBMotor.setPower(.3);
-        DFMotor.setPower(-.3);
-
-        runtime.reset();
-        while (runtime.milliseconds()<750) {
-
-        }
-//back up
         DFMotor.setPower(.3);
         PBMotor.setPower(-.3);
         PFMotor.setPower(-.3);
         DBMotor.setPower(.3);
 
         runtime.reset();
-        while (runtime.milliseconds()<1000) {
+        while (runtime.milliseconds()<100) {
 
         }
-        DFMotor.setPower(-.3);
-        PBMotor.setPower(.3);
-        PFMotor.setPower(.3);
-        DBMotor.setPower(-.3);
+        DFMotor.setPower(-.25);
+        PBMotor.setPower(-.25);
+        PFMotor.setPower(-.25);
+        DBMotor.setPower(-.25);
 
         runtime.reset();
         while (runtime.milliseconds()<1000) {
+
+        }
+
+
+        DFMotor.setPower(.5);
+        PBMotor.setPower(-.5);
+        PFMotor.setPower(-.5);
+        DBMotor.setPower(.5);
+
+        runtime.reset();
+        while (runtime.milliseconds()<300) {
+
+        }
+
+        PBMotor.setPower(-.5);
+        PFMotor.setPower(.4);
+        DBMotor.setPower(-.4);
+        DFMotor.setPower(.5);
+
+        runtime.reset();
+        while (runtime.milliseconds()<850) {
+
+        }
+
+        DFMotor.setPower(-.25);
+        PBMotor.setPower(-.25);
+        PFMotor.setPower(-.25);
+        DBMotor.setPower(-.25);
+
+        runtime.reset();
+        while (runtime.milliseconds()<420) {
+
+        }
+
+        PBMotor.setPower(-.5);
+        PFMotor.setPower(.3);
+        DBMotor.setPower(-.3);
+        DFMotor.setPower(.5);
+
+        runtime.reset();
+        while (runtime.milliseconds()<700) {
+
+        }
+
+        PBMotor.setPower(-.5);
+        PFMotor.setPower(-.4);
+        DBMotor.setPower(.4);
+        DFMotor.setPower(.5);
+
+        runtime.reset();
+        while (runtime.milliseconds()<1500) {
 
         }
 
@@ -453,14 +550,71 @@ public class DoubleTimedTFlowVAuto extends LinearOpMode {
         PBMotor.setPower(0);
         PFMotor.setPower(0);
         DBMotor.setPower(0);
-//lower lift
-        lift.setPower(1);
+
+        MServo.setPosition(Servo.MIN_POSITION);
         runtime.reset();
 
+        while (runtime.milliseconds()<100) {
+
+        }
+        MServo.setPosition(Servo.MIN_POSITION);
+        runtime.reset();
+
+        while (runtime.milliseconds()<100) {
+
+        }
+        MServo.setPosition(Servo.MIN_POSITION);
+
+
+        PBMotor.setPower(.35);
+        PFMotor.setPower(.35);
+        DBMotor.setPower(-.45);
+        DFMotor.setPower(-.45);
+
+
+
+        runtime.reset();
+        while (runtime.milliseconds()<1950) {
+
+        }
+
+        runtime.reset();
+        while (runtime.milliseconds()<350) {
+
+        }
+
+        DFMotor.setPower(0);
+        PBMotor.setPower(0);
+        PFMotor.setPower(0);
+        DBMotor.setPower(0);
+
+
+        telemetry.addData("Path", "Complete");
+        telemetry.update();
+
+        lift.setPower(1);
+
+
+        runtime.reset();
+//CHANGE THIS TO 3000 FOR ACTUAL GO TIME
         while (runtime.milliseconds()<6000) {
 
         }
         lift.setPower(0);
 
+        PBMotor.setPower(.35);
+        PFMotor.setPower(.35);
+        DBMotor.setPower(-.35);
+        DFMotor.setPower(-.35);
+
+        runtime.reset();
+        while (runtime.milliseconds()<2000) {
+
+        }
+
+        PBMotor.setPower(0);
+        PFMotor.setPower(0);
+        DBMotor.setPower(0);
+        DFMotor.setPower(0);
     }
 }

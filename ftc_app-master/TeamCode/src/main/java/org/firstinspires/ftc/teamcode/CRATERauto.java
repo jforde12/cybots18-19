@@ -123,11 +123,17 @@ public class CRATERauto extends LinearOpMode {
          
         }
         lift.setPower(0);
-        
-        DFMotor.setPower(.5);
-        PBMotor.setPower(-.5);
-        PFMotor.setPower(-.5);
-        DBMotor.setPower(.5);
+
+        runtime.reset();
+        //change this number to add a delay
+        while (runtime.milliseconds()<5) {
+
+        }
+
+        DFMotor.setPower(.3);
+        PBMotor.setPower(-.3);
+        PFMotor.setPower(-.3);
+        DBMotor.setPower(.3);
         
         runtime.reset();
         while (runtime.milliseconds()<100) {
@@ -144,23 +150,23 @@ public class CRATERauto extends LinearOpMode {
         }
 
 
-        PBMotor.setPower(-.5);
-        PFMotor.setPower(.4);
-        DBMotor.setPower(-.4);
-        DFMotor.setPower(.5);
-
-        runtime.reset();
-        while (runtime.milliseconds()<600) {
-
-        }
-
         DFMotor.setPower(.5);
         PBMotor.setPower(-.5);
         PFMotor.setPower(-.5);
         DBMotor.setPower(.5);
 
         runtime.reset();
-        while (runtime.milliseconds()<500) {
+        while (runtime.milliseconds()<200) {
+
+        }
+
+        PBMotor.setPower(-.5);
+        PFMotor.setPower(.4);
+        DBMotor.setPower(-.4);
+        DFMotor.setPower(.5);
+
+        runtime.reset();
+        while (runtime.milliseconds()<900) {
 
         }
 
@@ -170,7 +176,7 @@ public class CRATERauto extends LinearOpMode {
         DBMotor.setPower(-.25);
 
         runtime.reset();
-        while (runtime.milliseconds()<420) {
+        while (runtime.milliseconds()<370) {
 
         }
 
@@ -180,17 +186,17 @@ public class CRATERauto extends LinearOpMode {
         DFMotor.setPower(.5);
 
         runtime.reset();
-        while (runtime.milliseconds()<700) {
+        while (runtime.milliseconds()<970) {
 
         }
 
-        PBMotor.setPower(-.5);
-        PFMotor.setPower(-.4);
-        DBMotor.setPower(.4);
-        DFMotor.setPower(.5);
+        PBMotor.setPower(-.47);
+        PFMotor.setPower(-.43);
+        DBMotor.setPower(.43);
+        DFMotor.setPower(.47);
 
         runtime.reset();
-        while (runtime.milliseconds()<1250) {
+        while (runtime.milliseconds()<1500) {
 
         }
 
@@ -214,10 +220,10 @@ public class CRATERauto extends LinearOpMode {
         MServo.setPosition(Servo.MIN_POSITION);
 
 
-        PBMotor.setPower(.38);
-        PFMotor.setPower(.38);
-        DBMotor.setPower(-.42);
-        DFMotor.setPower(-.42);
+        PBMotor.setPower(.42);
+        PFMotor.setPower(.42);
+        DBMotor.setPower(-.38);
+        DFMotor.setPower(-.38);
 
 
 
@@ -250,13 +256,13 @@ public class CRATERauto extends LinearOpMode {
         }
         lift.setPower(0);
 
-        PBMotor.setPower(.25);
-        PFMotor.setPower(.25);
-        DBMotor.setPower(-.25);
-        DFMotor.setPower(-.25);
+        PBMotor.setPower(.35);
+        PFMotor.setPower(.35);
+        DBMotor.setPower(-.35);
+        DFMotor.setPower(-.35);
 
         runtime.reset();
-        while (runtime.milliseconds()<2500) {
+        while (runtime.milliseconds()<2000) {
 
         }
 
