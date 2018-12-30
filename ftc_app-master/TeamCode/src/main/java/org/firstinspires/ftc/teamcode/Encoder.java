@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.teamcode.subsystems.Robot;
 
 @Autonomous(name="EncoderTest", group="Template")
-@Disabled
+//@Disabled
 public class Encoder extends LinearOpMode {
     //private Robot robot = new Robot(this);
     //private boolean loop = true;
@@ -27,18 +27,18 @@ public class Encoder extends LinearOpMode {
         DFMotor = hardwareMap.get(DcMotor.class, "DF");
         lift  = hardwareMap.get(DcMotor.class, "Back");
 
-        PBMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        PFMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        DBMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        DFMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         PBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         PFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         DBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         DFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        PBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        /*PBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         PFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         DBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        DFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        DFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
 
         int newPBTarget;
         int newPFTarget;
@@ -52,15 +52,20 @@ public class Encoder extends LinearOpMode {
         waitForStart();
         //put autonomous code blocks here
         //robot.drive.timeDrive(.1,0,0,1);
-        /*newPBTarget = PBMotor.getCurrentPosition() - 1440;
-        newPFTarget = PBMotor.getCurrentPosition() - 1440;
-        newDBTarget = PBMotor.getCurrentPosition() - 1440;
-        newDFTarget = PBMotor.getCurrentPosition() - 1440;*/
+        newPBTarget = PBMotor.getCurrentPosition() + 537;
+        newPFTarget = PBMotor.getCurrentPosition() + 537;
+        newDBTarget = PBMotor.getCurrentPosition() + 537;
+        newDFTarget = PBMotor.getCurrentPosition() + 537;
 
-        /*PBMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        PBMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         PFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         DBMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        DFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);*/
+        DFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        PBMotor.setTargetPosition(newPBTarget);
+        PFMotor.setTargetPosition(newPFTarget);
+        DBMotor.setTargetPosition(newDBTarget);
+        DFMotor.setTargetPosition(newDFTarget);
 
         PBMotor.setPower(.2);
         PFMotor.setPower(.2);

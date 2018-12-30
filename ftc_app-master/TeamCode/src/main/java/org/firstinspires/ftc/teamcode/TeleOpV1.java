@@ -49,6 +49,8 @@ public class TeleOpV1 extends OpMode {
     private DcMotor back;
     private Servo MServo;
     private Servo RServo;
+    boolean speed = true;
+    boolean lastx = true;
 
     @Override
     public void init() {
@@ -98,8 +100,12 @@ public class TeleOpV1 extends OpMode {
             double leftY = Math.signum(-gamepad1.left_stick_y) * Math.pow(-gamepad1.left_stick_y, 2);
             double leftX = Math.signum(-gamepad1.left_stick_x) * Math.pow(-gamepad1.left_stick_x, 2);
             double rightX = Math.signum(gamepad1.right_stick_x) * Math.pow(gamepad1.right_stick_x, 2);
-            
-        robotCentric(.6*rightX,.6*-leftX,.6*-leftY);
+
+        if (speed) {
+            robotCentric(.6 * rightX, .6 * -leftX, .6 * -leftY);
+        } else {
+            robotCentric(.3 * rightX, .3 * -leftX, .3 * -leftY);
+        }
 
         if (gamepad1.right_bumper){
             back.setPower(-1);
@@ -118,6 +124,14 @@ public class TeleOpV1 extends OpMode {
             RServo.setPosition(Servo.MIN_POSITION);
 
         }
+
+        if (lastx) {
+            if (!gamepad1.x) {
+                speed = !speed;
+            }
+
+        }
+        lastx = gamepad1.x;
 
 
     }

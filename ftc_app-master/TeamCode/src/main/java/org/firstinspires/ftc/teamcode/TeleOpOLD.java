@@ -18,18 +18,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 */
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import java.util.Arrays;
-import com.qualcomm.robotcore.hardware.Gyroscope;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.Gyroscope;
+import com.qualcomm.robotcore.hardware.Servo;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Arrays;
 
 /**
  * This file contains an example of an iterative (Non-Linear) "OpMode".
@@ -42,34 +37,40 @@ import java.util.Date;
  * or add a @Disabled annotation to prevent this OpMode from being added to the Driver Station
  */
 @TeleOp(name="TeleOpOLD", group="TeleOp")
-@Disabled
+
 public class TeleOpOLD extends OpMode {
     /* Declare OpMode members. */
     private Gyroscope imu;
     private Gyroscope imu_1;
-    private DcMotor BRMotor;
-    private DcMotor FRMotor;
-    private DcMotor FLMotor;
-    private DcMotor BLMotor;
+    private DcMotor PBMotor;
+    private DcMotor PFMotor;
+    private DcMotor DBMotor;
+    private DcMotor DFMotor;
     private DcMotor back;
-
+    private Servo MServo;
+    private Servo RServo;
+    boolean speed = true;
+    boolean lastx = true;
 
     @Override
     public void init() {
         telemetry.addData("Status", "Initialized");
         imu = hardwareMap.get(Gyroscope.class, "imu");
         imu_1 = hardwareMap.get(Gyroscope.class, "imu 1");
-        BRMotor = hardwareMap.get(DcMotor.class, "PB");
-        FRMotor = hardwareMap.get(DcMotor.class, "PF");
-        FLMotor = hardwareMap.get(DcMotor.class, "DB");
-        BLMotor = hardwareMap.get(DcMotor.class, "DF");
+        PBMotor = hardwareMap.get(DcMotor.class, "PB");
+        PFMotor = hardwareMap.get(DcMotor.class, "PF");
+        DBMotor = hardwareMap.get(DcMotor.class, "DB");
+        DFMotor = hardwareMap.get(DcMotor.class, "DF");
         back = hardwareMap.get(DcMotor.class, "Back");
+        MServo = hardwareMap.get(Servo.class, "MS");
+        RServo = hardwareMap.get(Servo.class, "Rake");
 
-        FLMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        FRMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        BRMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        BLMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        
+        DBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        PFMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        PBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        DFMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
 
     }
 
@@ -78,7 +79,7 @@ public class TeleOpOLD extends OpMode {
      */
     @Override
     public void init_loop() {
-        
+
     }
 
     /*
@@ -86,9 +87,8 @@ public class TeleOpOLD extends OpMode {
      */
     @Override
     public void start() {
-        
-        
-    
+
+
     }
 
     /*
@@ -96,23 +96,45 @@ public class TeleOpOLD extends OpMode {
      */
     @Override
     public void loop() {
-            
-            double leftY = Math.signum(-gamepad1.left_stick_y) * Math.pow(-gamepad1.left_stick_y, 2);
-            double leftX = Math.signum(-gamepad1.left_stick_x) * Math.pow(-gamepad1.left_stick_x, 2);
-            double rightX = Math.signum(gamepad1.right_stick_x) * Math.pow(gamepad1.right_stick_x, 2);
-            
-        robotCentric(.6*rightX,.6*-leftX,.6*-leftY);
 
-        if (gamepad1.right_bumper){
+        double leftY = Math.signum(-gamepad1.left_stick_y) * Math.pow(-gamepad1.left_stick_y, 2);
+        double leftX = Math.signum(-gamepad1.left_stick_x) * Math.pow(-gamepad1.left_stick_x, 2);
+        double rightX = Math.signum(gamepad1.right_stick_x) * Math.pow(gamepad1.right_stick_x, 2);
+
+        if (speed) {
+            robotCentric(.6 * rightX, .6 * -leftX, .6 * -leftY);
+        } else {
+            robotCentric(.3 * rightX, .3 * -leftX, .3 * -leftY);
+        }
+
+
+        if (gamepad1.right_bumper) {
             back.setPower(-1);
-            
-            }else if (gamepad1.left_bumper){
+
+        } else if (gamepad1.left_bumper) {
             back.setPower(1);
-            
-            }else {
-                back.setPower(0);
+
+        } else {
+            back.setPower(0);
+        }
+
+        if (gamepad1.a) {
+            RServo.setPosition(Servo.MAX_POSITION);
+
+        } else if (gamepad1.b) {
+            RServo.setPosition(Servo.MIN_POSITION);
+
+        }
+        if (lastx) {
+            if (!gamepad1.x) {
+                speed = !speed;
             }
+
+        }
+        lastx = gamepad1.x;
+
     }
+
 
     /*
      * Code to run ONCE after the driver hits STOP
@@ -137,14 +159,15 @@ public class TeleOpOLD extends OpMode {
             rightBack /= biggestInput;
         }
 
-        FLMotor.setPower(leftFront);
-        FRMotor.setPower(rightFront);
-        BLMotor.setPower(leftBack);
-        BRMotor.setPower(rightBack);
+        DBMotor.setPower(leftFront);
+        PFMotor.setPower(rightFront);
+        DFMotor.setPower(leftBack);
+        PBMotor.setPower(rightBack);
 
-        telemetry.addData("BackRightMotorPower",BRMotor.getPower());
-        telemetry.addData("FrontRightMotorPower",FRMotor.getPower());
-        telemetry.addData("FrontLeftRMotorPower",FLMotor.getPower());
-        telemetry.addData("BackLeftMotorPower",BLMotor.getPower());
-}
+        telemetry.addData("BackRightMotorPower", PBMotor.getPower());
+        telemetry.addData("FrontRightMotorPower", PFMotor.getPower());
+        telemetry.addData("FrontLeftRMotorPower", DBMotor.getPower());
+        telemetry.addData("BackLeftMotorPower", DFMotor.getPower());
+        telemetry.update();
+    }
 }
