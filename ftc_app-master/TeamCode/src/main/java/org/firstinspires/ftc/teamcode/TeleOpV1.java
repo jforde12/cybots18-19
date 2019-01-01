@@ -101,12 +101,13 @@ public class TeleOpV1 extends OpMode {
             double leftX = Math.signum(-gamepad1.left_stick_x) * Math.pow(-gamepad1.left_stick_x, 2);
             double rightX = Math.signum(gamepad1.right_stick_x) * Math.pow(gamepad1.right_stick_x, 2);
 
+        //pressing and releasing the "x" button changes the robots speed coefficient between .3 and .6
         if (speed) {
             robotCentric(.6 * rightX, .6 * -leftX, .6 * -leftY);
         } else {
             robotCentric(.3 * rightX, .3 * -leftX, .3 * -leftY);
         }
-
+        //lift controlled by bumpers
         if (gamepad1.right_bumper){
             back.setPower(-1);
             
@@ -116,15 +117,15 @@ public class TeleOpV1 extends OpMode {
             }else {
                 back.setPower(0);
             }
-
-        if (gamepad1.a) {
+        //rake code, no longer have a rake though
+        /* if (gamepad1.a) {
             RServo.setPosition(Servo.MAX_POSITION);
 
         }else if (gamepad1.b) {
             RServo.setPosition(Servo.MIN_POSITION);
+        }*/
 
-        }
-
+        //pressing and releasing the "x" button changes the robots speed coefficient between .3 and .6
         if (lastx) {
             if (!gamepad1.x) {
                 speed = !speed;
